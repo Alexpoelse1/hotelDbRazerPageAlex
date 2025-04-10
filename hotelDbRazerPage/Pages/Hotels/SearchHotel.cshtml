@@ -1,0 +1,45 @@
+﻿@page
+@using Models;
+@model hotelDbRazerPage.Pages.Hotels.SearchHotelModel
+@{
+    ViewData["Data"] = "SearchHotel";
+}
+<h1>SEARCH HOTEL</h1>
+<!-- Hotel Table -->
+<div class="table-responsive">
+    <table class="table table-bordered table-hover mb-5">
+
+        <thead class="table-dark">
+            <tr>
+                <th>HotelNr</th>
+                <th>HotelNavn</th>
+                <th>HotelAdresse</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Hotel item in Model.ResultHotels)
+            {
+                <tr>
+                    <td class="py-3">@item.Hotel_No</td>
+                    <td class="py-3">@item.Name</td>
+                    <td class="py-3">@item.Address</td>
+                    <td class="text-center">
+                        <!-- Edit Button -->
+                        <form method="post" asp-page-handler="Edit" asp-route-Id="@item.Hotel_No" class="d-inline">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                        </form>
+
+                        <!-- Delete Button -->
+                        <form method="post" asp-page-handler="Delete" asp-route-deleteHotelNr="@item.Hotel_No" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

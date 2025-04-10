@@ -1,0 +1,129 @@
+﻿@page
+@using Models;
+@model hotelDbRazerPage.Pages.Hotels.ShowHotelsModel
+@{
+    ViewData["Data"] = "ShowHotels";
+}
+<!---
+<h3>Hoteller</h3>
+
+
+
+<form method="post" style="display: inline;" asp-page-handler="Create">
+    <input type="submit" value="Create" />
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>HotelNr</th>
+            <th>HotelNavn</th>
+            <th>HotelAdresse</th>
+        </tr>
+    </thead>
+    
+
+       
+    <tbody>
+ 
+    </tbody>
+</table>
+-->
+<!-- Include Bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<div class="container mt-4">
+    <h3 class="text-center mb-4">Hoteller</h3>
+
+    <!-- Create Button -->
+    <div class="text-center mb-3">
+        <form method="post" asp-page-handler="Create">
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-plus"></i> Create New Hotel
+            </button>
+        </form>
+    </div>
+
+
+
+    <form method="post" asp-page-handler="Search" class="d-flex align-items-center gap-3">
+        <!-- Search Input -->
+        <div>
+            <label asp-for="Search.SearchText" class="control-label">Search</label>
+            <input asp-for="Search.SearchText" class="form-control" style="width: 250px;" />
+        </div>
+
+        <!-- Dropdown for Search Type -->
+        <div>
+            <label asp-for="Search.SearchType" class="control-label">Search By</label>
+            <select asp-for="Search.SearchType" class="form-control" style="width: 150px;">
+                <option value="Id">Id</option>
+                <option value="Name">Name</option>
+                <option value="Address">Address</option>
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary btn-sm">
+            <i class="fas fa-search"></i> Search
+        </button>
+    </form>
+
+
+
+
+
+    <script>
+        function updateHiddenSearchType() {
+            const selectedType = document.getElementById('SearchType').value;
+            document.getElementById('HiddenSearchType').value = selectedType;
+        }
+    </script>
+
+
+
+
+    <!-- Hotel Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover mb-5">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Hotel_No</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Hotel item in Model.Hotels)
+                {
+                    <tr>
+                        <td class="py-3">@item.Hotel_No</td>
+                        <td class="py-3">@item.Name</td>
+                        <td class="py-3">@item.Address</td>
+                        <td class="text-center">
+                            <!-- Edit Button -->
+                            <form method="post" asp-page-handler="Edit" asp-route-Id="@item.Hotel_No" class="d-inline">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                            </form>
+
+                            <!-- Delete Button -->
+                            <form method="post" asp-page-handler="Delete" asp-route-deleteHotelNr="@item.Hotel_No" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Include FontAwesome for Icons -->
+<script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script>

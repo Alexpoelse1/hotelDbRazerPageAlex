@@ -1,0 +1,89 @@
+﻿
+@page
+@model hotelDbRazerPage.Pages.Hotels.DeleteHotelModel
+@{
+}
+<!---
+
+<h3>Delete Hotel </h3>
+
+<form method="post">
+    <div class="form-group">
+
+        <p>Hotel Number</p>
+        <p>@Model.HotelNr</p>
+    
+        <p>Hotel Name</p>
+        <p>@Model.HotelName</p>
+       
+        <p>Hotel Address</p>
+        <p>@Model.HotelAddress</p>
+
+    </div>
+
+    
+</form>
+    <div class="col-md-4 text-center">
+    <form style="display: inline;" asp-page-handler="Delete" asp-route-Nr="@Model.HotelNr">
+            <input type="Submit" value="Delete Hotel" class="btn btn-primary" />
+        </form>
+    </div>
+    --->
+
+
+
+
+
+<!-- Include Bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4">
+                <h3 class="text-danger text-center">Delete Hotel</h3>
+                <p class="text-center">Are you sure you want to delete this hotel?</p>
+
+                <div class="border p-3 mb-3">
+                    <p><strong>Hotel Number:</strong> @Model.HotelNr</p>
+                    <p><strong>Hotel Name:</strong> @Model.HotelName</p>
+                    <p><strong>Hotel Address:</strong> @Model.HotelAddress</p>
+                </div>
+
+                <div class="text-center">
+                    <!-- Cancel Button -->
+                    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+
+                    <!-- Delete Button that triggers modal -->
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                        Delete Hotel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Modal for Delete Confirmation -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong>@Model.HotelName</strong>? This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="post" asp-page-handler="Delete" asp-route-Nr="@Model.HotelNr">
+                    <input type="submit" value="Confirm Delete" class="btn btn-danger" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap JS for Modal Functionality -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
